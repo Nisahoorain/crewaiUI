@@ -1,0 +1,177 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crew Ai</title>
+    <link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/" method="post">
+                <img src="logo.png" alt=""> <br><br>
+                <h1> Crew Ai by <a href="https://i8is.com/" target="_blank">I8IS</a> </h1>
+                <p>This UI offers a streamlined platform for AI-driven crew management, enabling users to efficiently
+                    configure agents, assign tasks, and optimize workflow with enhanced control and flexibility.</p>
+
+                <fieldset>
+
+                    <legend><span class="number">1</span> Api Key</legend>
+                    <p>This label prompts the user to input their API key, which is required for accessing certain
+                        functionalities or services.</p>
+
+                    <label for="name">Enter your Api key:</label>
+                    <input type="text" id="name" name="user_name">
+
+                </fieldset>
+                <fieldset>
+
+                    <legend><span class="number">2</span>Agents</legend>
+
+                    <label for="name">User Role:</label>
+                    <p>This label asks the user to specify the role of the agent, indicating their position or
+                        permissions within the system</p>
+                    <input type="text" id="name" name="user_name">
+
+                    <label for="bio">Goal:</label>
+                    <p>This label requests the user to outline the objective or purpose of the agent, providing clarity
+                        on their intended tasks.</p>
+                    <input type="text" id="name" name="user_name">
+
+                    <label for="bio">Back Story:</label>
+                    <p>This label invites the user to provide background information or context regarding the agent,
+                        which might inform its behavior or decisions.</p>
+                    <textarea id="bio" name="user_bio"></textarea>
+
+
+                    <div class="selection">
+                        <div>
+                            <label for="job">Allow Deligations:</label>
+                            <p>This label presents a choice to the user regarding whether the agent should be allowed to
+                                delegate tasks to others or not.</p>
+                            <input type="radio" name="yes_deligation" id="">yes
+                            <input type="radio" name="no_deligation" id="">No
+                        </div>
+
+                        <div class="verbose-div">
+                            <label for="">Verbose:</label>
+                            <p>This label indicates a setting that controls the level of detail in the output, usually
+                                toggling between a concise or verbose mode.</p>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                    </div>
+                    <button class="short-btn">ADD AGENT</button>
+
+                </fieldset>
+                <fieldset>
+
+                    <legend><span class="number">2</span>Create Task</legend>
+
+                    <label for="name">Select Agent:</label>
+                    <p>This label instructs the user to choose from a list of available agents for task assignment.</p>
+                    <select name="" id="">
+                        <option value="">Agent1</option>
+                        <option value="">Agent2</option>
+                    </select>
+                    <option value=""></option>
+
+                    <label for="bio">Task Name:</label>
+                    <p>This label prompts the user to enter a descriptive name for the task, aiding in its
+                        identification and organization.</p>
+                    <input type="text" id="name" name="user_name">
+
+                    <label for="bio">Task Description:</label>
+                    <p>This label asks the user to provide a detailed explanation or instructions for the task, ensuring
+                        clarity and understanding.</p>
+                    <textarea id="bio" name="user_bio"></textarea>
+                    <button class="short-btn">ADD Task</button>
+
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">2</span>Execution Order</legend>
+                    <p>This label relates to arranging tasks in the order they should be executed, allowing for
+                        prioritization and sequencing.</p>
+                    <div>
+                        <ol id="sortable-list">
+                            <li draggable="true">Task 1 for agent 1 <i class="fa-solid fa-trash"></i></li>
+                            <li draggable="true">Task 2 for agent 2<i class="fa-solid fa-trash"></i></li>
+                            <li draggable="true">Task 3 for agent 3<i class="fa-solid fa-trash"></i></li>
+                            <li draggable="true">Task 4 for agent 4 <i class="fa-solid fa-trash"></i></li>
+                            <li draggable="true">Task 5 for agent 5 <i class="fa-solid fa-trash"></i></li>
+                            <li draggable="true">Task 6 for agent 6 <i class="fa-solid fa-trash"></i></li>
+                        </ol>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend><span class="number">2</span>Verbose Output Option</legend>
+                    <p>The "Text" option specifies text format for verbose output, "Console" displays output in the
+                        console, and "Both" suggests output in both text and console formats.</p>
+                    <div class="Verbose-option">
+                        <input type="radio" name="yes_deligation" id="">Text
+                        <input type="radio" name="no_deligation" id="">Console
+                        <input type="radio" name="no_deligation" id="">Both
+
+                    </div>
+                </fieldset>
+                <button type="submit">Execution</button>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const list = document.getElementById('sortable-list');
+
+    let draggedItem = null;
+
+    list.addEventListener('dragstart', function (e) {
+        draggedItem = e.target;
+        e.target.style.opacity = '0.5'; // Make the item translucent while dragging
+    });
+
+    list.addEventListener('dragend', function (e) {
+        draggedItem.style.opacity = ''; // Reset opacity after dragging
+        draggedItem = null;
+    });
+
+    list.addEventListener('dragover', function (e) {
+        e.preventDefault(); // Allow drop
+    });
+
+    list.addEventListener('dragenter', function (e) {
+        if (e.target.tagName === 'LI') {
+            e.target.style.border = '2px dashed black'; // Highlight drop target
+        }
+    });
+
+    list.addEventListener('dragleave', function (e) {
+        if (e.target.tagName === 'LI') {
+            e.target.style.border = ''; // Remove highlight when leaving drop target
+        }
+    });
+
+    list.addEventListener('drop', function (e) {
+        if (e.target.tagName === 'LI') {
+            e.target.style.border = ''; // Remove highlight from drop target
+            if (draggedItem !== e.target) {
+                const parent = draggedItem.parentNode;
+                const nextSibling = draggedItem.nextSibling === e.target ? draggedItem : e.target.nextSibling;
+                parent.insertBefore(draggedItem, e.target);
+                parent.insertBefore(e.target, nextSibling);
+            }
+        }
+    });
+</script>
+
+</html>
